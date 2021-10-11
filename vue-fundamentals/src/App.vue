@@ -1,25 +1,25 @@
 <template>
-  <Counter 
-    title="Primer counter"
-    :start=101 
-  />
 
-  <Counter
-    :start=101
-  />
+    <!-- 
+      <Counter title="Primer counter" :start="101" />
 
-  <Counter 
-    :start=101
-  />
+      <Counter :start="101" />
+
+      <Counter :start="101" /> 
+    -->
+
+    <Indecision />
+ 
 </template>
 
 <script>
-  import { Counter } from "@/components";
+  import { Counter, Indecision } from "@/components";
 
   export default {
     name: "App",
     components: {
       Counter,
+      Indecision,
     },
   };
 </script>
