@@ -1,8 +1,10 @@
 <template>
   <h2>{{ customTitle }}</h2>
   <p>{{ counter }} <sup>2</sup> = {{ squareCounter }}</p>
-  <button @click="increase">+1</button>
-  <button @click="decrease">-1</button>
+  <div class="buttons">
+    <button @click="increase">+1</button>
+    <button @click="decrease">-1</button>
+  </div>
 </template>
 
 <script>
