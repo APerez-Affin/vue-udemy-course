@@ -1,0 +1,1 @@
+export { default as InitialComponent } from '@/components/InitialComponent';
