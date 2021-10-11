@@ -35,14 +35,17 @@
           this.answer = answer === "yes" ? "Si!" : "No!";
           this.image = image;
         } catch (error) {
-          console.log(error);
+          console.log("IndecisionComponent:", error);
+          this.answer = "No se pudo cargar del API";
+          this.img = null;
         }
       },
     },
     watch: {
       question(value, oldValue) {
         this.isValidQuestion = false;
-        if (!value.includes("?")) return
+        console.log({ value });
+        if (!value.includes("?")) return;
         this.isValidQuestion = true;
         this.getAnswer();
       },

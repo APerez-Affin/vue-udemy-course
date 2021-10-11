@@ -1,15 +1,11 @@
 <template>
+  <Counter title="Primer counter" :start="101" />
 
-    <!-- 
-      <Counter title="Primer counter" :start="101" />
+  <Counter :start="101" />
 
-      <Counter :start="101" />
+  <Counter :start="101" />
 
-      <Counter :start="101" /> 
-    -->
-
-    <Indecision />
- 
+  <Indecision />
 </template>
 
 <script>
