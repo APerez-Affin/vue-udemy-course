@@ -1,7 +1,7 @@
 import { default as pokemonApi } from "@/api/pokemonApi";
 
 // Creamos un array de 650 espacios
-const getPokemons = () => {
+export const getPokemons = () => {
   const pokemonArr = Array.from(Array(650));
 
   // Devolvemos cada index más 1
@@ -9,7 +9,7 @@ const getPokemons = () => {
 };
 
 // Realiza la llamada a la api
-const getPokemonNames = async ([a, b, c, d] = []) => {
+export const getPokemonNames = async ([a, b, c, d] = []) => {
   // Esperamos todos los datos de cada peticion
   const [p1, p2, p3, p4] = await Promise.all([
     pokemonApi.get(`${a}`),
