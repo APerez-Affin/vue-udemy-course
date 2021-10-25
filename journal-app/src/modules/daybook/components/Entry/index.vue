@@ -1,24 +1,50 @@
 <template>
-  <div class="entry" @click="$router.push({ name: 'entry', params: { id: 10} })">
+  <div
+    class="entry"
+    @click="$router.push({ name: 'entry', params: { id: entry.id } })"
+  >
     <div class="entry__title">
-      <span class="entry__day">15</span>
+      <span class="entry__day">{{ day }}</span>
       <div class="entry__date">
-        <span class="entry__month"> Julio</span>
-        <span class="entry__year">2021, jueves</span>
+        <span class="entry__month">{{ month }}</span>
+        <span class="entry__year">{{ yearDay }}</span>
       </div>
     </div>
     <div class="entry__description">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
-      fugiat exercitationem at quo, harum eum magni illum numquam iure
-      blanditiis ut, assumenda animi molestias porro adipisci odit magnam.
-      Deserunt, natus.
+      {{ shortText }}
     </div>
   </div>
 </template>
 
 <script>
+import getDayMonthYear from "../../helpers/getDayMonthYear";
 export default {
   name: "Entry",
+  props: {
+    entry: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    shortText() {
+      return this.entry.text.length > 130
+        ? this.entry.text.substring(0, 130) + "..."
+        : this.entry.text;
+    },
+    day() {
+      const { day } = getDayMonthYear(this.entry.date);
+      return day;
+    },
+    month() {
+      const { month } = getDayMonthYear(this.entry.date);
+      return month;
+    },
+    yearDay() {
+      const { yearDay } = getDayMonthYear(this.entry.date);
+      return yearDay;
+    },
+  },
 };
 </script>
 
