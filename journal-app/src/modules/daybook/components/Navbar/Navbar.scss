@@ -1,0 +1,34 @@
+@import "@/styles/settings/index.scss";
+
+.navbar {
+  background-color: $bg-primary;
+  padding: 24px;
+
+  &__content {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr auto;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: stretch;
+  }
+  &__brand {
+    display: flex;
+    align-items: center;
+    &-container {
+      max-width: 50px;
+      width: 100%;
+      margin-right: 8px;
+    }
+    &-logo {
+      object-fit: cover;
+      width: 100%;
+    }
+    &-logoName {
+      font-size: 24px;
+    }
+  }
+  &__actions {
+    width: fit-content;
+  }
+}

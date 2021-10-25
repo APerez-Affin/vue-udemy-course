@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+a {
+  color: $white;
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.375rem;
+}
+
+b {
+  font-weight: 700;
+}
+
+// Padding sections
+.padding-section {
+  padding: 40px 0 ;
+}
+
+.margin-section {
+  margin: 32px 0;
+}
+
+.container {
+  max-width: 1296px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}

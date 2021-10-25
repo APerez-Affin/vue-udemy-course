@@ -1,0 +1,43 @@
+@import "@/styles/settings/index.scss";
+
+.entry {
+  padding: 12px 0;
+  transition: all 30;
+
+  &__title {
+    display: flex;
+    margin-bottom: 8px;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+
+    & > span {
+      &:not(:first-child) {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__day {
+    font-size: 32px;
+    color: $green;
+    font-weight: bold;
+  }
+
+  &__year {
+    font-size: 14px;
+  }
+
+  &__date {
+    width: 100%;
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(179, 179, 179, 0.226);
+  }
+}

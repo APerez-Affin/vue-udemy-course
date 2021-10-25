@@ -1,0 +1,36 @@
+.btn {
+  padding: 12px 16px;
+  outline: none;
+  color: $white;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 300ms;
+
+  &--outline {
+    background-color: transparent;
+    border: 2px solid $white;
+    font-size: 18px;
+    color: white;
+
+    &--black{
+      color: black;
+    }
+
+    &:hover {
+      background-color: $bg-green;
+      border: 2px solid $bg-green;
+      color: white;
+    }
+  }
+
+  &--red {
+    background-color: rgb(207, 81, 81);
+    border: 2px solid rgb(207, 81, 81);
+    font-size: 18px;
+
+    &:hover {
+      background-color: rgb(51, 47, 47);
+      border: 2px solid rgb(51, 47, 47);
+    }
+  }
+}

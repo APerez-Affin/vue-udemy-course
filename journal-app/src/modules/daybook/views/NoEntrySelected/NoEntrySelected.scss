@@ -1,0 +1,13 @@
+@import "@/styles/settings/index.scss";
+
+.noentryselected {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+
+  &__title {
+    font-size: 40px;
+    font-weight: bold;
+  }
+}
