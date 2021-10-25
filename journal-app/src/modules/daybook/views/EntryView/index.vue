@@ -42,6 +42,8 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import { mapGetters } from "vuex";
+
+/* Helpers */
 import getDayMonthYear from "../../helpers/getDayMonthYear";
 
 export default {
