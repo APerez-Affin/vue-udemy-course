@@ -1,17 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 
 /* Modules - Routes */
 import daybookRouter from '@/modules/daybook/router';
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
+
   {
     path: '/daybook',
+    alias: ['/', '/daybook'],
     ...daybookRouter
   },
 ]
