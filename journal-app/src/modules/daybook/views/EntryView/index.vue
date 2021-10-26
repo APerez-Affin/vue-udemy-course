@@ -11,11 +11,21 @@
         </div>
 
         <div class="entryview__actions">
-          <button class="btn btn--red">
+          <button v-if="entry.id" class="btn btn--red" @click="onDeleteEntry">
             Borrar
             <font-awesome-icon :icon="['fas', 'trash']" />
           </button>
-          <button class="btn btn--outline btn--outline--black">
+          <input
+            v-show="false"
+            type="file"
+            @change="onSelectedImage"
+            ref="imageSelector"
+            accept="image/png, image/jpg"
+          />
+          <button
+            class="btn btn--outline btn--outline--black"
+            @click="onSelectImage"
+          >
             Subir foto
             <font-awesome-icon :icon="['fas', 'upload']" />
           </button>
@@ -28,9 +38,15 @@
         <textarea placeholder="¿Qué sucedio hoy?" v-model="entry.text">
         </textarea>
       </div>
-
       <img
-        src="https://estaticos-cdn.prensaiberica.es/clip/df5fc539-206d-45b4-949a-79ef09bda348_16-9-discover-aspect-ratio_default_0.jpg"
+        v-if="entry.picture && !localImage"
+        :src="entry.picture"
+        alt="entry-picture"
+        class="entryview__picture"
+      />
+      <img
+        v-if="localImage"
+        :src="localImage"
         alt="entry-picture"
         class="entryview__picture"
       />
@@ -43,8 +59,12 @@
 import { defineAsyncComponent } from "vue";
 import { mapActions, mapGetters } from "vuex";
 
+/* Alerts */
+import Swal from "sweetalert2";
+
 /* Helpers */
 import getDayMonthYear from "../../helpers/getDayMonthYear";
+import uploadImage from "../../helpers/uploadImage"
 
 export default {
   name: "EntryView",
@@ -57,6 +77,8 @@ export default {
   data() {
     return {
       entry: null,
+      localImage: null,
+      file: null,
     };
   },
   components: {
@@ -78,7 +100,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("journal", ["updateEntry", "createEntry"]),
+    ...mapActions("journal", ["updateEntry", "createEntry", "deleteEntry"]),
     loadEntry() {
       let entry;
 
@@ -94,12 +116,59 @@ export default {
       this.entry = entry;
     },
     async saveEntry() {
+      new Swal({
+        title: "Espere por favor",
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
+
+      const picture = await uploadImage(this.file);
+      this.entry.picture = picture;
+
       if (this.entry.id) {
         this.updateEntry(this.entry);
       } else {
         const id = await this.createEntry(this.entry);
         this.$router.push({ name: "entry", params: { id } });
       }
+      this.file = null;
+      Swal.fire("Guardado", "Entrada registrada con éxito", "success");
+     
+    },
+    async onDeleteEntry() {
+      const { isConfirmed } = await Swal.fire({
+        title: "¿Está seguro?",
+        text: "Una vez borrado, no se puede recuperar",
+        showDenyButton: true,
+        confirmButtonText: "Si, estoy seguro",
+      });
+      if (isConfirmed) {
+        new Swal({
+          title: "Espere por favor",
+          allowOutsideClick: false,
+        });
+        Swal.showLoading();
+        await this.deleteEntry(this.entry.id);
+        this.$router.push({ name: "no-entry" });
+        Swal.fire("Eliminado", "", "success");
+      }
+    },
+    onSelectedImage(event) {
+      const file = event.target.files[0];
+
+      if (!file) {
+        this.localImage = null;
+        this.file = null;
+        return;
+      }
+
+      this.file = file;
+      const fr = new FileReader();
+      fr.onload = () => (this.localImage = fr.result);
+      fr.readAsDataURL(file);
+    },
+    onSelectImage() {
+      this.$refs.imageSelector.click();
     },
   },
   created() {
