@@ -36,7 +36,7 @@
       />
     </div>
   </template>
-  <AddIcon icon="save" @on:click="saveEntry"/>
+  <AddIcon icon="save" @on:click="saveEntry" />
 </template>
 
 <script>
@@ -78,15 +78,29 @@ export default {
     },
   },
   methods: {
-    ...mapActions('journal', ['updateEntry']),
+    ...mapActions("journal", ["updateEntry", "createEntry"]),
     loadEntry() {
-      const entry = this.getEntryById(this.id);
-      if (!entry) this.$router.push({ name: "no-entry" });
+      let entry;
+
+      if (this.id === "new") {
+        entry = {
+          text: "Nuevo entry",
+          date: new Date().getTime(),
+        };
+      } else {
+        entry = this.getEntryById(this.id);
+        if (!entry) this.$router.push({ name: "no-entry" });
+      }
       this.entry = entry;
     },
-    async saveEntry(){
-      this.updateEntry(this.entry)
-    }
+    async saveEntry() {
+      if (this.entry.id) {
+        this.updateEntry(this.entry);
+      } else {
+        const id = await this.createEntry(this.entry);
+        this.$router.push({ name: "entry", params: { id } });
+      }
+    },
   },
   created() {
     this.loadEntry();

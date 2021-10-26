@@ -39,6 +39,9 @@
   }
 
   &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
     & button {
       &:first-child {
         margin-right: 12px;

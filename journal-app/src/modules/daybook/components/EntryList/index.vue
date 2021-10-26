@@ -8,12 +8,18 @@
         v-model.trim="term"
       />
     </div>
+    <div class="entrylist__actions">
+      <button
+        class="btn btn--outline btn--outline--black"
+        @click="$router.push({ name: 'entry', params: { id: 'new' } })"
+      >
+        <font-awesome-icon :icon="['fas', 'plus']" />
+        Nueva entrada
+      </button>
+    </div>
+
     <div class="entrylist__scrollarea">
-      <Entry
-        v-for="entry of entriesByTerm"
-        :key="entry.id"
-        :entry="entry"
-      />
+      <Entry v-for="entry of entriesByTerm" :key="entry.id" :entry="entry" />
     </div>
   </div>
 </template>

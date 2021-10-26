@@ -1,7 +1,7 @@
 <template>
   <div class="noentryselected">
     <h1 class="noentryselected__title">No hay nada seleccionado</h1>
-     <AddIcon @on:click="addEntry"/>
+    <AddIcon @on:click="createNewEntry" />
   </div>
 </template>
 
@@ -13,10 +13,10 @@ export default {
     AddIcon: defineAsyncComponent(() => import("../../components/AddIcon")),
   },
   methods: {
-    async addEntry(){
-      console.log('Add')
-    }
-  }
+    createNewEntry() {
+      this.$router.push({ name: "entry", params: { id: "new" } });
+    },
+  },
 };
 </script>
 
