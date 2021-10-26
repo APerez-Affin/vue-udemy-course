@@ -1,7 +1,7 @@
 <template>
   <div class="noentryselected">
     <h1 class="noentryselected__title">No hay nada seleccionado</h1>
-    <AddIcon />
+     <AddIcon @on:click="addEntry"/>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   components: {
     AddIcon: defineAsyncComponent(() => import("../../components/AddIcon")),
   },
+  methods: {
+    async addEntry(){
+      console.log('Add')
+    }
+  }
 };
 </script>
 

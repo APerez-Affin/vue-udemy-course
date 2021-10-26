@@ -1,8 +1,28 @@
-// export const myActions = async ({ commit }) => {};
+import journalApi from "@/api/journalApi";
 
-export const loadEntries = async (/*{  commit  } */) => {};
+export const loadEntries = async ({ commit }) => {
+  const { data } = await journalApi.get("/entries.json");
 
-export const updateEntry = async (/*{  commit  } */) => {};
+  const entries = [];
 
-export const createEntry = async ( /*{  commit  } */) => {};
+  for (const id of Object.keys(data)) {
+    entries.push({
+      id,
+      ...data[id],
+    });
+  }
 
+  commit("setEntries", entries);
+};
+
+export const updateEntry = async ({ commit }, entry) => {
+  const { picture, text, date } = entry;
+  await journalApi.put(`/entries/${entry.id}.json`, {
+    date,
+    picture,
+    text,
+  });
+  commit("updateEntry", { ...entry });
+};
+
+export const createEntry = async (/*{  commit  } */) => {};

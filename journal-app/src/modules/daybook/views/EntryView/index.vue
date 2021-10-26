@@ -36,12 +36,12 @@
       />
     </div>
   </template>
-  <AddIcon icon="save" />
+  <AddIcon icon="save" @on:click="saveEntry"/>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 /* Helpers */
 import getDayMonthYear from "../../helpers/getDayMonthYear";
@@ -78,11 +78,15 @@ export default {
     },
   },
   methods: {
+    ...mapActions('journal', ['updateEntry']),
     loadEntry() {
       const entry = this.getEntryById(this.id);
       if (!entry) this.$router.push({ name: "no-entry" });
       this.entry = entry;
     },
+    async saveEntry(){
+      this.updateEntry(this.entry)
+    }
   },
   created() {
     this.loadEntry();

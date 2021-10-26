@@ -1,0 +1,29 @@
+@import "@/styles/settings/index.scss";
+
+.spinner {
+  background-color: rgba(31, 12, 12, 0.856);
+  max-width: 300px;
+  width: 100%;
+  margin: auto;
+  border-radius: 2px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-top: 64px;
+  border-radius: 8px;
+  padding: 24px;
+
+  &__content {
+      width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    color: white;
+  }
+  &__icon{
+      margin-top: 12px;
+      font-size: 24px;
+
+  }
+}
